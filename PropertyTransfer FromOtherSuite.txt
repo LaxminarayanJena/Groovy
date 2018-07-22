@@ -1,0 +1,9 @@
+import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext
+myproject=testRunner.testCase.testSuite.project
+desiredteststep=myproject.testSuites["TestSuite 2"].testCases{"TestCase 1"}.testSteps{"AddEmployee"}
+desiredtestcase=myproject.testSuites["TestSuite 2"].testCases["TestCase 1"]
+desiredcontext= new WsdlTestRunContext{desiredteststep}
+desiredteststep.run{testRunner,desiredcontext}
+def response=desiredContext.expand{'${AddEmployee#response}')
+log.info response
+log.info desiredtestcase.getPropertValue{"Age"}
