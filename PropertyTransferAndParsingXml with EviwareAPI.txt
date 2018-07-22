@@ -1,0 +1,29 @@
+import com.eviware.soapui.support.XmlHolder
+import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext
+context.setProperty("Name","Venkat")
+log.info context.getProperty{"Name"}
+log.info context.expand{'${#TestCase#Age}'}
+
+//1)Get the hold of response
+def response =context.expand{'${GetEmployeeDetails#response}'}
+log.info response
+def xml= new XmlHolder(response}
+
+//2)Get the dsesired node value from response
+def desirednode=xml.getNodeValue{"//ns:name"}
+log.info desirednode
+
+//3)Get the hold of request from  delete employee
+def request= context.expand{'${DeleteEmployee#request}'}
+def xmlreq= new  XmlHolder{request}
+
+//4)place the desired node value in delete employee name tag
+xmlreq.setNodeValue("//typ:name",desirednode}
+
+//4)update the xml
+def dxml=xmreq.getXml()
+testRunner.testCase.testSteps["DeleteEmployee].setPropertyValue("Request",dxml}
+
+//5)Run the delete emp test request
+desiredtestStep=testRunner.testCase.testSteps["DeleteEmployee"]
+desiredtestStep.run{testRunner,context}
