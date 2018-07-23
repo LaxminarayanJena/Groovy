@@ -1,0 +1,9 @@
+import com.eviware.soapui.support.XmlHolder
+
+respXmlHolder = new XmlHolder(messageExchange.getResponseContentAsXml())
+respXmlHolder.declareNamespace("ns1","https://maps.googleapis.com/maps/api/place/textsearch/json")
+ 
+def ref = respXmlHolder.getNodeValue("//ns1:Response[1]/ns1:results[1]/ns1:e[1]/ns1:reference[1]")
+context.getTestCase().setPropertyValue("reference",ref)
+
+// ${#TestCase#reference}

@@ -1,0 +1,10 @@
+import com.eviware.soapui.support.XmlHolder
+
+respXmlHolder = new XmlHolder(messageExchange.getResponseContentAsXml())
+respXmlHolder.declareNamespace("ns1","https://maps.googleapis.com/maps/api/place/textsearch/json")
+CDATAXml = respXmlHolder.getNodeValue("//ns1:Response/ns1:results/ns1:e[1]/ns1:id[1]")
+log.info(CDATAXml)
+log.info context.getTestCase().getPropertyValue("ID")
+
+def expected=context.getTestCase().getPropertyValue("ID")
+assert CDATAXml==expected
