@@ -1,0 +1,19 @@
+import com.eviware.soapui.support.XmlHolder
+def xml= new XmlHolder(mockRequest.requestContent)
+def request=xml["//typ:employeeName"]
+def response =""
+if(request.equals{"IT"})
+{
+	response="IT"
+}
+
+else if(request.equals{"FIANANCE"})
+{
+	response="Finance"
+}
+
+else 
+{
+	response="Management"
+}
+return response;

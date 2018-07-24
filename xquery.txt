@@ -1,0 +1,9 @@
+declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace m='https://footballpool.dataaccess.eu';
+<Result>
+{
+for $z at $i in //m:tPlayerName
+order by $i
+return <Name>{$i}--{data($z/m:sName)}</Name>
+}
+</Result>
