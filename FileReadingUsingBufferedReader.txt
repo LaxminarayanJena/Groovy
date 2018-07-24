@@ -1,0 +1,10 @@
+def f= new File("D://docker.txt")
+def fr= new FileReader(f)
+def br= new BufferedReader(fr)
+def s= br.readLine()
+
+while(s!=null)
+{
+	log.info s
+	s=br.readLine()
+}
